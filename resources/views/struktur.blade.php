@@ -6,7 +6,6 @@
     <title>Rumah Sakit Hewan Pendidikan - Universitas Airlangga</title>
 
     <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
-    <!-- @vite('resources/css/home.css') -->
     
 </head>
 <body>

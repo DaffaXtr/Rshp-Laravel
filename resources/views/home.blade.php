@@ -1,47 +1,79 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rumah Sakit Hewan Pendidikan - Universitas Airlangga</title>
+@extends('layouts.app')
 
-    <link rel="stylesheet" href="{{ asset('/css/home.css') }}">
-    <!-- @vite('resources/css/home.css') -->
-    
-</head>
-<body>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }} - {{ session('user_name') }}</div>
 
-    <header>
-        <ul class="header">
-            <li class="header-li"><a href="/">Home</a></li>
-            <li class="header-li"><a href="/struktur">Struktur Organisasi</a></li>
-            <li class="header-li"><a href="/layanan">Layanan</a></li>
-            <li class="header-li"><a href="/visi">Visi Misi</a></li>
-            <li class="header-li"><a href="/login">Login</a></li>
-        </ul>
-    </header>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-    <main>
-        <section id="home" class="hero">
-            <div class="hero-text">
-                <h1>Rumah Sakit Hewan Pendidikan</h1>
-                <p>Rumah Sakit Hewan Pendidikan Universitas Airlangga berinovasi untuk selalu meningkatkan kualitas pelayanan, maka dari itu Rumah Sakit Hewan Pendidikan Universitas Airlangga mempunyai fitur pendaftaran online yang mempermudah untuk mendaftarkan hewan kesayangan anda.</p>
-                <button onclick="document.getElementById('layanan').scrollIntoView();">Lihat Layanan Kami</button>
+                    {{ __('You are logged in!') }} {{ session('user_role_name') }}
+
+                    <div class="mt-4">
+                        <div class="row">
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.user.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-users"></i> Manage Users
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.role.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-user-shield"></i> Manage Roles
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.pet.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-paw"></i> Manage Pets
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.jenis-hewan.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage jenis Hewan
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.kategori.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage Kategori
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.kategori-klinis.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage Kategori Klinis
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.kode-tindakan-terapi.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage Kode Tindakan Terapi
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.pemilik.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage Pemilik Hewan
+                                </a>
+                            </div>
+                            <div class="col-md-12 mb-2">
+                                <a href="{{ route('admin.ras-hewan.index') }}" class="btn btn-primary btn-block">
+                                    <i class="fas fa-jenis"></i> Manage Ras Hewan
+                                </a>
+                            </div>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                @csrf 
+                                <button class="btn btn-danger" type="submit">
+                                    <i class="fas fa-sign-out-alt"></i> Logout
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <img src="{{ asset('image/rshp-1024x460.jpeg') }}" alt="Gedung Rumah Sakit Hewan Pendidikan">
-        </section>
-    </main>
-
-    <footer>
-        <div>
-            Copyright © 2024 Universitas Airlangga. All Rights Reserved.
         </div>
-        <div class="foot3">
-            <p>Privacy Policy</p>
-            <p>Term</p>
-            <p>Contact</p>
-        </div>
-    </footer>
-
-</body>
-</html>
+    </div>
+</div>
+@endsection
