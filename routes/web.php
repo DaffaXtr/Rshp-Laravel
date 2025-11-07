@@ -26,17 +26,25 @@ Route::get('/visi', [HomeController::class, 'visi'])->name('visi');
 Auth::routes();
 Route::get('/home', [HomeController::class, 'home'])->name('home');
 
-Route::middleware('isAdministrator')->group(function () {
-    Route::get('/admin/dashboard', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/jenis-hewan', [JenisHewanController::class, 'index'])->name('admin.jenis-hewan.index');
-    Route::get('/admin/pemilik', [PemilikController::class, 'index'])->name('admin.pemilik.index');
-    Route::get('/admin/ras-hewan', [RasHewanController::class, 'index'])->name('admin.ras-hewan.index');
-    Route::get('/admin/kategori', [KategoriController::class, 'index'])->name('admin.kategori.index');
-    Route::get('/admin/kategori-klinis', [KategoriKlinisController::class, 'index'])->name('admin.kategori-klinis.index');
-    Route::get('/admin/kode-tindakan-terapi', [KodeTindakanTerapiController::class, 'index'])->name('admin.kode-tindakan-terapi.index');
-    Route::get('/admin/pet', [PetController::class, 'index'])->name('admin.pet.index');
-    Route::get('/admin/role', [RoleController::class, 'index'])->name('admin.role.index');
-    Route::get('/admin/user', [UserController::class, 'index'])->name('admin.user.index');
+Route::middleware('isAdministrator')->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('dashboard');
+    Route::get('/jenis-hewan', [JenisHewanController::class, 'index'])->name('jenis-hewan.index');
+    Route::get('/jenis-hewan/create', [JenisHewanController::class, 'create'])->name('jenis-hewan.create');
+    Route::post('/jenis-hewan/store', [JenisHewanController::class, 'store'])->name('jenis-hewan.store');
+    Route::get('/pemilik', [PemilikController::class, 'index'])->name('pemilik.index');
+    Route::get('/pemilik/create', [PemilikController::class, 'create'])->name('pemilik.create');
+    Route::post('/pemilik/store', [PemilikController::class, 'store'])->name('pemilik.store');
+    Route::get('/ras-hewan', [RasHewanController::class, 'index'])->name('ras-hewan.index');
+    Route::get('/ras-hewan/create', [RasHewanController::class, 'create'])->name('ras-hewan.create');
+    Route::post('/ras-hewan/store', [RasHewanController::class, 'store'])->name('ras-hewan.store');
+    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/kategori-klinis', [KategoriKlinisController::class, 'index'])->name('kategori-klinis.index');
+    Route::get('/kode-tindakan-terapi', [KodeTindakanTerapiController::class, 'index'])->name('kode-tindakan-terapi.index');
+    Route::get('/pet', [PetController::class, 'index'])->name('pet.index');
+    Route::get('/role', [RoleController::class, 'index'])->name('role.index');
+    Route::get('/user', [UserController::class, 'index'])->name('user.index');
+    Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
+    Route::post('/user/store', [UserController::class, 'store'])->name('user.store');
 });
 
 Route::middleware('isResepsionis')->group(function () {

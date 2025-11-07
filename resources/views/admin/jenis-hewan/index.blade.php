@@ -6,8 +6,8 @@
         <h1 class="h3 mb-0 text-gray-800">
             <i class="fas fa-dog me-2"></i> Manajemen Jenis Hewan
         </h1>
-        <a href="#" class="btn btn-primary btn-sm shadow-sm" style="background-color: var(--primary-blue); border-color: var(--primary-blue);">
-            <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data
+        <a href="{{ route('admin.jenis-hewan.create') }}" class="btn btn-primary btn-sm shadow-sm" style="background-color: var(--primary-blue); border-color: var(--primary-blue);">
+            <i class="fas fa-plus fa-sm text-white"></i> Tambah Data
         </a>
     </div>
 
@@ -24,7 +24,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                <table class="table" id="dataTable" width="100%" cellspacing="0">
                     <thead class="bg-light">
                         <tr>
                             <th class="text-center">ID Jenis Hewan</th>
@@ -38,7 +38,7 @@
                                 <td class="text-center">{{ $jenis->idjenis_hewan }}</td>
                                 <td>{{ $jenis->nama_jenis_hewan }}</td>
                                 <td class="text-center">
-                                    <a href="#" class="btn btn-sm btn-info me-2 shadow-sm">
+                                    <a href="#" class="btn btn-sm btn-info me-2 shadow-sm" style="color: white; background-color: var(--primary-blue); border-color: var(--primary-blue);">
                                         <i class="fas fa-edit"></i> Edit
                                     </a>
                                     <form action="#" method="POST" class="d-inline">

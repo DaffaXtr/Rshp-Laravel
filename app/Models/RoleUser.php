@@ -9,6 +9,7 @@ class RoleUser extends Model
     protected $table = 'role_user';
     protected $primaryKey = 'idrole_user';
     protected $fillable = ['iduser', 'idrole'];
+    public $timestamps = false;
 
     public function user()
     {

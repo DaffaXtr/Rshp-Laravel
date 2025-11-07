@@ -1,23 +1,78 @@
-<table border="1" cellpadding="5" cellspacing="0">
-    <thead>
-        <tr>
-            <th>ID User</th>
-            <th>Nama User</th>
-            <th>Email</th>
-            <th>Role</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach ($user as $usr)
-            <tr>
-                <td>{{ $usr->iduser }}</td>
-                <td>{{ $usr->nama }}</td>
-                <td>{{ $usr->email }}</td>
-                <td>
-                    @foreach ($usr->roleUser as $roleUser)
-                        {{ $roleUser->role->nama_role }}@if (!$loop->last), @endif
-                    @endforeach
-            </tr>
-        @endforeach
-    </tbody>
-</table>
+@extends('layouts.app')
+
+@section('content')
+<div class="container-fluid">
+    
+    {{-- 1. Header dan Tombol Tambah --}}
+    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">
+            <i class="fas fa-users me-2"></i> Manajemen User
+        </h1>
+        {{-- Ganti route ke halaman create yang sesuai --}}
+        <a href="{{ route('admin.user.create') }}" class="btn btn-primary btn-sm shadow-sm" style="background-color: var(--primary-blue); border-color: var(--primary-blue);">
+            <i class="fas fa-plus fa-sm text-white"></i> Tambah User
+        </a>
+    </div>
+
+    {{-- 2. Pesan Sukses (Success Alert) --}}
+    @if (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            {{ session('success') }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+
+    {{-- 3. Card Container untuk Tabel --}}
+    <div class="card shadow mb-4 border-0 rounded-3">
+        <div class="card-header py-3 bg-white rounded-top-3">
+            <h6 class="m-0 fw-bold" style="color: var(--primary-blue);">Daftar Pengguna Sistem</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-hover" id="dataTable" width="100%" cellspacing="0">
+                    <thead class="bg-light">
+                        <tr>
+                            <th class="text-center">ID User</th>
+                            <th>Nama User</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th class="text-center">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($user as $usr)
+                            <tr>
+                                <td class="text-center">{{ $usr->iduser }}</td>
+                                <td>{{ $usr->nama }}</td>
+                                <td>{{ $usr->email }}</td>
+                                <td>
+                                    @foreach ($usr->roleUser as $roleUser)
+                                        <span class="badge bg-primary me-1">{{ $roleUser->role->nama_role }}</span>@if (!$loop->last)@endif
+                                    @endforeach
+                                </td>
+                                
+                                {{-- Kolom Aksi --}}
+                                <td class="text-center" style="min-width: 120px;">
+                                    {{-- Ganti route edit --}}
+                                    <a href="#" class="btn btn-sm btn-info me-1 shadow-sm" style="color: white; background-color: var(--primary-blue); border-color: var(--primary-blue);">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    
+                                    {{-- Ganti route destroy --}}
+                                    <form action="#" method="POST" class="d-inline">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-sm btn-danger shadow-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus user ini?')">
+                                            <i class="fas fa-trash"></i> Hapus
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection

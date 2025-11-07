@@ -3,14 +3,14 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Contracts\Auth\Authenticatable; // <-- Diperlukan oleh Auth Guard
-use Illuminate\Auth\Authenticatable as AuthenticatableTrait; // <-- Trait untuk mengimplementasikan method yang diperlukan
-use App\Models\Pemilik; // <-- Tambah impor untuk relasi pemilik()
-use App\Models\RoleUser; // <-- Tambah impor untuk relasi roleUser()
+use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Auth\Authenticatable as AuthenticatableTrait; 
+use App\Models\Pemilik; 
+use App\Models\RoleUser; 
 
-class User extends Model implements Authenticatable // <-- Implementasikan Interface Authenticatable
+class User extends Model implements Authenticatable 
 {
-    use AuthenticatableTrait; // <-- Gunakan Trait
+    use AuthenticatableTrait;
 
     protected $table = 'user'; 
     protected $primaryKey = 'iduser'; 
